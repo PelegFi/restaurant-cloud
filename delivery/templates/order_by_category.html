@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="brand-logo center">Create a new order</h3>
+<a href="{% url 'order' cart_id=cart_id %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>back all Categoris</a>
+  {% if messages %}
+  <ul class="messages">
+  {% for message in messages%}
+  <li {% if message.tag %} class="{{message.tags}}" {% endif %} style="color: {% if message.tags == 'error' %}red {% elif message.tags == 'success' %}green{% endif %};">{{message}}</li>
+  {% endfor%}
+  </ul>
+  {% endif %}
+  <div class="row" style="display: flex; justify-content: center; flex-wrap: wrap;">
+    {% for dish in dishes %}
+    <div class="col s12 m4">
+      <form action="{% url 'order' cart_id=cart_id %}" method="post">
+        {% csrf_token %}
+        <div class="card meduim" style="max-height: min-content;">
+            <div class="card-image">
+                <img style="max-width:30mm;max-height:30mm;" src="{{dish.image}}">
+            </div>
+            <div class="card-content">
+                <span class="card-title">{{dish.name}}</span>
+                <ul>
+                    <li>PRICE : {{dish.price}}</li>
+                    <li>description : {{dish.description}}</li>
+                    <li>is gluten free : {{dish.is_gluten_free}}</li>
+                    <li>is vegeterian : {{dish.is_vegeterian}}</li>
+                    <li> dish category : {{dish.category_id.name}}</li>
+                </ul>
+                <div>Amount :</div>
+                <input type="number" name="selected_dish_amount"  aria-valuemin="0">
+                <input type="hidden" name="current_dish_id" value="{{ dish.id }}">
+                <button type="submit" class="btn"><i class="material-icons">add</i>add to cart </button>
+            </div>
+        </div>
+      </form>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock content%}

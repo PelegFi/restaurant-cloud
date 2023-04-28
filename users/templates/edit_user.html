@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="brand-logo center">Edit user</h3>
+<a href="{% url 'user_screen' %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>back to user page</a>
+<form action="{% url 'edit_user' %}" method="POST" novalidate style="max-width: 400px; margin: 0 auto;">
+    {% csrf_token %}
+    <div>
+        <h5>{{form.first_name.label}}</h5>
+        <input type="text" name="first_name" maxlength="30" required="" id="id_first_name" value="{{request.user.first_name}}">
+        {% for error in form.first_name.errors %}
+            <div style="color:red">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.last_name.label}}</h5>
+        <input type="text" name="last_name" maxlength="30" required="" id="id_last_name" value="{{request.user.last_name}}">
+        {% for error in form.last_name.errors %}
+            <div style="color:red">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.username.label}}</h5>
+        <input type="text" name="username" maxlength="30" required="" id="id_username" value="{{request.user.username}}" >
+        {% for error in form.username.errors %}
+        <div style="color:red">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.password.label}}</h5>
+        {{form.password}}
+        {% for error in form.password.errors %}
+            <div style="color:red">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.email.label}}</h5>
+        <input type="text" name="email" maxlength="30" required="" id="id_email" value="{{request.user.email}}">
+        {% for error in form.email.errors %}
+        <div style="color:red">{{error}}</div>
+        {% endfor %}
+    </div>
+    <button type="submit">Edit</button>
+</form>
+{% endblock content%}

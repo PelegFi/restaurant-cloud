@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="brand-logo center">Signup</h3>
+<a href="{% url 'user_screen' %}" class="waves-effect waves-light btn">back to user page</a>
+<form action="{% url 'signup' %}" method="POST" novalidate>
+    {% csrf_token %}
+    <div>
+        <h5>{{form.first_name.label}}</h5>
+        {{form.first_name}}
+        {% for error in form.first_name.errors %}
+            <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.last_name.label}}</h5>
+        {{form.last_name}}
+        {% for error in form.last_name.errors %}
+            <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.username.label}}</h5>
+        {{form.username}}
+        {% for error in form.username.errors %}
+        <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.password1.label}}</h5>
+        {{form.password1}}
+        {% for error in form.password1.errors %}
+            <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.password2.label}}</h5>
+        {{form.password2}}
+        {% for error in form.password2.errors %}
+            <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.email.label}}</h5>
+        {{form.email}}
+        {% for error in form.email.errors %}
+        <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        {% for error in form.is_staff.errors %}
+            <div>{{error}}</div>
+        {% endfor %}
+        {{form.is_staff.label}}
+        <input type="checkbox" name="is_staff" required id="id_is_staff">
+    </div>
+    <button type="submit">Sign Up</button>
+</form>
+{% endblock content%}

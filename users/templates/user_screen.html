@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="{% url 'edit_user' %}" class="waves-effect waves-light btn"><i class="material-icons left">person_add</i>Edit User</a></li>
+        <li><a href="{% url 'cart' %}" class="waves-effect waves-light btn"><i class="material-icons left">add</i>New order</a></li>
+        <li><a href="{% url 'active_orders' %}" class="waves-effect waves-light btn"><i class="material-icons left">dehaze</i>active orders</a></li>
+        <li><a href="{% url 'order_history' %}" class="waves-effect waves-light btn"><i class="material-icons left">history</i>order history</a></li>
+        <li><a href="{% url 'logout_user' %}" class="waves-effect waves-light btn"><i class="material-icons left">cancel</i>Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <h3 class="brand-logo center">Menu</h3>
+
+  <div class="input-field" style="width: 300px; margin: 0 auto;">
+    <form id="myForm" action="{% url 'user_screen' %}" method="post">
+      {% csrf_token %}
+      <label>category :</label>
+      <select class="browser-default" name="category_id" onchange="document.getElementById('myForm').submit();">
+        <option value="" disabled selected>Choose your option</option>
+        {% for category in categories %}
+        <option value="{{category.id}}">{{category.name}}</option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
+
+  <div class="row" style="display: flex; justify-content: center; flex-wrap: wrap;">
+    {% for dish in dishes %}
+    <div class="col s12 m4 l3">
+      <div class="card">
+        <div class="card-image">
+          <img style="max-width:30mm;max-height:30mm;" src="{{dish.image}}">
+        </div>
+        <div class="card-content">
+          <span class="card-title">{{dish.name}}</span>
+          <ul style="max-height: 200px; overflow-y: auto;">
+            <li>Price: {{dish.price}}</li>
+            <li>Description: {{dish.description}}</li>
+            <li>Gluten Free: {{dish.is_gluten_free}}</li>
+            <li>Vegetarian: {{dish.is_vegetarian}}</li>
+            <li>Category: {{dish.category_id.name}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock content %}

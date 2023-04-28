@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="brand-logo center">Signup</h3>
+<a href="{% url 'home_page' %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>back to home page</a>
+<form action="{% url 'signup' %}" method="POST" novalidate style="max-width: 400px; margin: 0 auto;">
+    {% csrf_token %}
+    <div>
+        <h5>{{form.first_name.label}}</h5>
+        {{form.first_name}}
+        {% for error in form.first_name.errors %}
+            <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.last_name.label}}</h5>
+        {{form.last_name}}
+        {% for error in form.last_name.errors %}
+            <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.username.label}}</h5>
+        {{form.username}}
+        {% for error in form.username.errors %}
+        <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.password1.label}}</h5>
+        {{form.password1}}
+        {% for error in form.password1.errors %}
+            <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.password2.label}}</h5>
+        {{form.password2}}
+        {% for error in form.password2.errors %}
+            <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h5>{{form.email.label}}</h5>
+        {{form.email}}
+        {% for error in form.email.errors %}
+        <div class="errors">{{error}}</div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn"><i class="material-icons left">add</i>Sign Up</button>
+</form>
+{% endblock content%}

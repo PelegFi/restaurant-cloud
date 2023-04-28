@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="brand-logo center">Edit categories</h3>
+<a href="{% url 'user_screen' %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>back to user page</a>
+<div style="text-align: center;">
+    <a class="waves-effect waves-light btn" href="{% url 'new_category' %}">Add new category</a>
+</div>
+
+{% for category in categories %}
+<div class="row">
+  <a href="{% url 'delete_category' id=category.id %}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></a>
+    <div class="col s6 m3 14">
+      <div class="card">
+        <div class="card-image">
+            <img style="max-width: 100%; height: auto;" src="{{ category.image }}">
+          <span style="border-radius:10%;padding: 5px;" class="card-title blue">{{category.name}}</span>
+        </div>
+        <div class="card-action center-align">
+            <a href="{% url 'edit_category' id=category.id %}">EDIT</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% endblock content %}

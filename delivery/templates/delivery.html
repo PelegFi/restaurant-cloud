@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h3 class="center-align">Checkout</h3>
+  <a href="{% url 'order' cart_id=current_cart.id %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>Back to order</a>
+
+  {% for item in current_cart.items_set.all %}
+    <div class="row">
+      <div class="col s12 m6 offset-m3">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">{{item.dish_id.name}}</span>
+            <ul>
+              <li>Price: {{item.dish_id.price}}</li>
+              <li>Amount: {{item.amount}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  <h4 class="center-align">Total order price: {{total_price}}</h4>
+
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %}class="{{message.tags}}"{% endif %} style="color: {% if message.tags == 'error' %}red{% elif message.tags == 'success' %}green{% endif %};">{{message}}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form action="{% url 'delivery' cart_id=current_cart.id %}" method="post" novalidate>
+    {% csrf_token %}
+    <label for="delivery_address">Delivery Address</label>
+    <div class="row">
+      <div class="input-field col s12">
+        <input name="delivery_address" id="delivery_address" type="text" class="validate">
+      </div>
+    </div>
+
+    <label for="comments">Comments</label>
+    <div class="row">
+      <div class="input-field col s12">
+        <input name="comments" id="comments" type="text" class="validate">
+      </div>
+    </div>
+
+    <div class="row center-align">
+      <button type="submit" class="btn waves-effect waves-light"><i class="material-icons left">done</i>Submit order</button>
+    </div>
+
+  </form>
+
+</div>
+
+{% endblock content %}

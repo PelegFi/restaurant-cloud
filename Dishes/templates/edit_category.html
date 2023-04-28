@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h3 class="center-align">Edit</h3>
+  <div class="row">
+    <div class="col s12">
+      <a href="{% url 'category_manage' %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>back</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <form class="col s12 m8 offset-m2 l6 offset-l3" action="{% url 'edit_category' id=category.id %}" method="post">
+      {% csrf_token %}
+      <div class="row">
+        <label for="category_name">Category Name</label>
+        <div class="input-field col s12">
+          <input id="category_name" name="category_name" type="text" class="validate" value="{{ category.name }}">
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="category_image">Category Image</label>
+        <div class="input-field col s12">
+          <input id="category_image" name="category_image" type="text" class="validate" value="{{ category.image }}">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+          <button type="submit" class="waves-effect waves-light btn">Edit</button>
+        </div>
+      </div>
+    </form>
+    {% if messages %}
+    <div class="row">
+      <div class="col s12">
+        <ul class="messages">
+          {% for message in messages %}
+            <li {% if message.tag %} class="{{ message.tags }}" {% endif %} style="color: {% if message.tags == 'error' %}red{% elif message.tags == 'success' %}green{% endif %};">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+  </div>
+{% endblock content %}

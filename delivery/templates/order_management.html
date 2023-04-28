@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="brand-logo center">Order managemant</h3>
+<a href="{% url 'user_screen' %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>back to user page</a>
+<table>
+    <thead>
+      <tr>
+          <th>delivered</th>
+          <th>order id</th>
+          <th>address</th>
+          <th>coments</th>
+          <th>created</th>
+          <th>user</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    {% for delivery in active_orders %}
+      <tr>
+        <th>
+            <form action="{% url 'order_management' %}" method="post" id="deliveryForm{{ forloop.counter }}">
+                {% csrf_token %}
+                <input type="checkbox" value="{{delivery.order_id.id}}" name="is_delivered" onclick="document.getElementById('deliveryForm{{ forloop.counter }}').submit();">
+              </form>         
+          </th>
+        <td>{{delivery.order_id.id}}</td>
+        <td>{{delivery.adress}}</td>
+        <td>{{delivery.comments}}</td>
+        <td>{{delivery.created|date:"Y-m-d"}}</td>
+        <td>
+            {{ delivery.order_id.user_id.username }}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock content%}

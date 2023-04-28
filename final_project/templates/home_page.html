@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="brand-logo center">Home Page</h3>
+
+<form action="{% url 'user_login' %}" method="POST" style="max-width: 400px; margin: 0 auto;">
+    {% csrf_token %}
+    <div class="row">
+        <label for="username">Username</label>
+        <div class="input-field col s12">
+          <input name="username" id="username" type="text" class="validate">
+        </div>
+    </div>
+    <div class="row">
+        <label for="password">Password</label>
+        <div class="input-field col s12">
+          <input name="password" id="password" type="password" class="validate">
+        </div>
+    </div>
+    {% if messages %}
+  <ul class="messages">
+  {% for message in messages%}
+  <li {% if message.tag %} class="{{message.tags}}" {% endif %} style="color: {% if message.tags == 'error' %}red {% elif message.tags == 'success' %}green{% endif %};">{{message}}</li>
+  {% endfor%}
+  </ul>
+  {% endif %}
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button type="submit" class="waves-effect waves-light btn">Log in</button>
+        <a href="{% url 'signup' %}" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Sign up</a>
+    </div>
+</form>
+{% endblock content %}

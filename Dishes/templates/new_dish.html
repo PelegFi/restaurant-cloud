@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="brand-logo center">new dish</h3>
+<a href="{% url 'dish_manage' %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>back</a>
+{% if messages %}
+  <ul class="messages">
+  {% for message in messages%}
+  <li {% if message.tag %} class="{{message.tags}}" {% endif %} style="color: {% if message.tags == 'error' %}red {% elif message.tags == 'success' %}green{% endif %};">{{message}}</li>
+  {% endfor%}
+  </ul>
+  {% endif %}
+
+<form action="{% url 'new_dish' %}" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="input-field col s12">
+          <input name='dish_name' type="text" class="validate" placeholder="dish_name">
+          <label for="dish_name"></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input name='dish_price' type="number" class="validate" placeholder="dish price">
+          <label for="dish_price"></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input name='dish_description' type="text" class="validate" placeholder="dish description">
+          <label for="dish_description"></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input name='dish_image' type="text" class="validate" placeholder="dish image">
+          <label for="dish_image"></label>
+        </div>
+    </div>
+    <p>
+        <label>
+          <input type="checkbox" class="filled-in" name="is_gluten_free" />
+          <span>is gluten free</span>
+        </label>
+    </p>
+    <p>
+        <label>
+          <input type="checkbox" class="filled-in" name="is_vegeterian" />
+          <span>is vegeterian</span>
+        </label>
+    </p>
+
+    <label>category</label>
+    <select class="browser-default" name="category_id">
+    <option value="" disabled selected>Choose your option</option>
+    {% for category in categories %}
+        <option value="{{category.id}}">{{category.name}}</option>
+    {% endfor %}
+    </select>
+    <button type="submit" class="waves-effect waves-light btn"> ADD </button>
+</form>
+{% endblock content %}

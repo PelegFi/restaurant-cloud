@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="brand-logo center">log in</h3>
+<form action="{% url 'user_login' %}" method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <label for="password">Username</label>
+        <div class="input-field col s12">
+          <input name="username"id="password" type="text" class="validate">
+        </div>
+    </div>
+    <div class="row">
+        <label for="password">Password</label>
+        <div class="input-field col s12">
+          <input name="password" id="password" type="password" class="validate">
+        </div>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages%}
+      <li {% if message.tag %} class="{{message.tags}}" {% endif%} style="color: red;">{{message}}</li>
+      {% endfor%}
+    </ul>
+    {% endif %}
+    <button type="submit" class="waves-effect waves-light btn">log in</button>
+</form>
+
+{% endblock content %}
