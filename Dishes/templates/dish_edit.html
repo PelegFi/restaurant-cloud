@@ -7,6 +7,14 @@
   </div>
 </div>
 
+{% if messages %}
+  <ul class="messages">
+  {% for message in messages%}
+  <li {% if message.tag %} class="{{message.tags}}" {% endif %} style="color: {% if message.tags == 'error' %}red {% elif message.tags == 'success' %}green{% endif %};">{{message}}</li>
+  {% endfor%}
+  </ul>
+  {% endif %}
+  
 <form action="{% url 'edit_dish' id=dish.id%}" method="post">
     {% csrf_token %}
     <img style="max-width:320px;max-height:180px;" src="{{dish.image}}">
