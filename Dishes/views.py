@@ -1,8 +1,10 @@
 from django.shortcuts import render ,redirect
+from django.contrib.auth.decorators import login_required
 from .models import Category, Dish
 from django.contrib import messages
 
 # dishes
+@login_required
 def dish_manage(request):
     category_list=Category.objects.all()
     dishes_list=Dish.objects.all()
@@ -12,7 +14,7 @@ def dish_manage(request):
     if request.method=='GET':
         return render(request, 'dish_manage.html',{"dishes":dishes_list,"categories":category_list})
 
-
+@login_required
 def new_dish(request):
     category_list=Category.objects.all()
     if request.method=='POST':
@@ -34,7 +36,7 @@ def new_dish(request):
     if request.method=='GET':
         return render(request,'new_dish.html',{"categories":category_list})
 
-
+@login_required
 def edit_dish(request,id):
     category_list=Category.objects.all()
     current_dish=Dish.objects.get(id=id)
@@ -51,6 +53,7 @@ def edit_dish(request,id):
     if request.method=='GET':
         return render(request,'dish_edit.html',{"dish":current_dish,"categories":category_list})
 
+@login_required
 def delete_dish(request,id):
     if request.method=='GET':
         current_dish=Dish.objects.get(id=id)
@@ -59,13 +62,15 @@ def delete_dish(request,id):
     
     
 #categories :
+@login_required
 def category_manage(request):
     if request.method=='POST':
         pass
     if request.method=='GET':
         category_list=Category.objects.all()
         return render(request, 'category_manage.html',{'categories':category_list})
-        
+
+@login_required     
 def new_category(request):
     if request.method == 'POST':
         if request.POST.get('category_name')=='' or request.POST['category_image']=='':
@@ -81,6 +86,7 @@ def new_category(request):
     if request.method == 'GET':
         return render(request, 'add_category.html')
 
+@login_required
 def edit_category(request,id):
     current_category=Category.objects.get(id=id)
     if request.method=='POST':
@@ -94,6 +100,7 @@ def edit_category(request,id):
     if request.method=='GET':
         return render(request,'edit_category.html',{"category":current_category})
     
+@login_required
 def delete_category(request,id):
     if request.method=='GET':
         current_category=Category.objects.get(id=id)
