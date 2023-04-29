@@ -3,13 +3,13 @@
 <h3 class="brand-logo center">Create a new order</h3>
 <div style="display: flex; justify-content: space-between; align-items: center;">
   <a href="{% url 'user_screen' %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>Back to user page</a>
-  <a href="{% url 'delivery' cart_id=cart_id %}" class="waves-effect waves-light btn"><i class="material-icons">done</i>Create a new order</a>
+  <a href="{% url 'delivery' cart_id=cart_id %}" class=" green waves-effect waves-light btn"><i class="material-icons">done</i>go to checkout</a>
 </div>
 
 <div class="input-field" style="width: 300px; margin: 0 auto;">
   <form id="myForm" action="{% url 'order' cart_id=cart_id %}" method="post">
     {% csrf_token %}
-    <label>category : </label>
+    <label style="color: black ; font-size: medium;">search by category  : </label>
     <select class="browser-default" name="category_id" onchange="document.getElementById('myForm').submit();">
     <option value="" disabled selected>Choose your option</option>
             {% for category in categories %}
@@ -46,7 +46,7 @@
                     <li> dish category : {{dish.category_id.name}}</li>
                 </ul>
                 <div>Amount :</div>
-                <input type="number" name="selected_dish_amount"  aria-valuemin="0">
+                <input type="number" name="selected_dish_amount" value="0" aria-valuemin="0">
                 <input type="hidden" name="current_dish_id" value="{{ dish.id }}">
                 <button type="submit" class="btn"><i class="material-icons">add</i>add to cart </button>
             </div>

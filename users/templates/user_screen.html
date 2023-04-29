@@ -1,14 +1,14 @@
 {% extends 'layout.html' %}
-
+{% load static %}
 {% block content %}
 <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
+      <img class="brand-logo" src="{% static 'image/resturant_symbol.png' %}" style="width: 65px;height: 65px;">
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="{% url 'edit_user' %}" class="waves-effect waves-light btn"><i class="material-icons left">person_add</i>Edit User</a></li>
-        <li><a href="{% url 'cart' %}" class="waves-effect waves-light btn"><i class="material-icons left">add</i>New order</a></li>
-        <li><a href="{% url 'active_orders' %}" class="waves-effect waves-light btn"><i class="material-icons left">dehaze</i>active orders</a></li>
         <li><a href="{% url 'order_history' %}" class="waves-effect waves-light btn"><i class="material-icons left">history</i>order history</a></li>
+        <li><a href="{% url 'active_orders' %}" class="waves-effect waves-light btn"><i class="material-icons left">dehaze</i>active orders</a></li>
+        <li><a href="{% url 'cart' %}" class="waves-effect waves-light btn"><i class="material-icons left">add</i>New order</a></li>
         <li><a href="{% url 'logout_user' %}" class="waves-effect waves-light btn"><i class="material-icons left">cancel</i>Logout</a></li>
       </ul>
     </div>

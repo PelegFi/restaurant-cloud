@@ -29,7 +29,7 @@ def order(request, cart_id ):
         dish_id = request.POST.get('current_dish_id')
         amount = request.POST.get('selected_dish_amount')
         if not dish_id or not amount:
-            messages.error(request, 'you enter to select a dish and amount ')
+            messages.error(request, 'enter a valid amount ')
         elif int(amount) <= 0:
             messages.error(request, 'Amount must be greater than 0.')
         else:
@@ -49,7 +49,7 @@ def order_by_category(request,category_id , cart_id):
         dish_id = request.POST.get('current_dish_id')
         amount = request.POST.get('selected_dish_amount')
         if not dish_id or not amount:
-            messages.error(request, 'you enter to select a dish and amount ')
+            messages.error(request, 'enter a valid amount ')
         elif int(amount) <= 0:
             messages.error(request, 'Amount must be greater than 0.')
         else:
@@ -85,12 +85,16 @@ def delivery(request,cart_id):
 @login_required  
 def order_history(request):
     if request.method == 'GET':
-        user_carts = request.user.cart_set.all()
-        delivered_list = []
-        for cart in user_carts:
-            deliveries = Delivery.objects.filter(order_id=cart, is_delivered=True)
-            delivered_list.extend(list(deliveries))
-        return render(request, 'order_history.html', {'delivered_list': delivered_list})
+        if request.user.is_staff:
+            deliveries=Delivery.objects.filter(is_delivered=True)
+            return render(request, 'order_history_manager.html', {'delivered_list': deliveries})
+        else:
+            user_carts = request.user.cart_set.all()
+            delivered_list = []
+            for cart in user_carts:
+                deliveries = Delivery.objects.filter(order_id=cart, is_delivered=True)
+                delivered_list.extend(list(deliveries))
+            return render(request, 'order_history.html', {'delivered_list': delivered_list})
     
 @login_required
 def active_orders(request):

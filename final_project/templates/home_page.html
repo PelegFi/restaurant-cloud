@@ -1,5 +1,10 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block content %}
+<div class="brand-logo center">
+<img src="{% static 'image/resturant_symbol.png' %}" style="width: 100px;height: 100px;">
+</div>
+
 <h3 class="brand-logo center">Home Page</h3>
 
 <form action="{% url 'user_login' %}" method="POST" style="max-width: 400px; margin: 0 auto;">

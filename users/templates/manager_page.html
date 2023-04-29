@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block content %}
 <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
+      <img class="brand-logo" src="{% static 'image/resturant_symbol.png' %}" style="width: 65px;height: 65px;">
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="{% url 'category_manage' %}" style="font-size: x-small; padding: 2px;padding-left: 10px;padding-right: 10px; border-radius: 15%; border-radius: 15%;" class="waves-effect waves-light btn">Manage Categories</a></li>
         <li><a href="{% url 'dish_manage' %}" style="font-size: x-small; padding: 2px;padding-left: 10px;padding-right: 10px; border-radius: 15%;" class="waves-effect waves-light btn">Manage Dishes</a></li>
