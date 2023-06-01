@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-tt%_edgifg^=g(2absd5ebdiik)n3cd4r(6_l0k2++fl!0ogo6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -39,6 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'delivery','Dishes','users'
 ]
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://finalprojectcloud.icygrass-60d1371a.germanywestcentral.azurecontainerapps.io'
+]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,10 +82,15 @@ WSGI_APPLICATION = 'final_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'database_user',
+        'PASSWORD': 'JMWXbcm3',
+        'HOST': 'tesetdatabase.postgres.database.azure.com',
+        'PORT': '',
     }
 }
+
 
 
 # Password validation

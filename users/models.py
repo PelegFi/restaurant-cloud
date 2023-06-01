@@ -6,5 +6,8 @@ class my_User(models.Model):
     password=models.CharField(max_length=20,unique=True,null=False)
     first_name=models.CharField(null=False,max_length=20)
     last_name=models.CharField(null=False,max_length=20)
-    is_staff=models.BooleanField(default=False)
+    is_staff=models.BooleanField(default=False )
     email=models.EmailField(null=False,default="")
+
+    class Meta : 
+        db_table = 'my_User'

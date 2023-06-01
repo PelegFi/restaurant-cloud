@@ -17,9 +17,9 @@ def signup(request):# sign up new users -  using django build in form
        form = CustomUserCreationForm(request.POST)
        if form.is_valid():#checking all the form has been correctly fiiled 
            form.save()
-           return redirect('user_login')
-       else:
            messages.success(request , 'singup success') 
+           return redirect('home_page')
+       else:
            return render(request, 'signup.html', {"form": form})
    elif request.method == 'GET':
        if request.user != None and request.user.is_staff :# the signup_admin have optiuon to make users 'staff'

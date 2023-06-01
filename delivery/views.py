@@ -106,7 +106,7 @@ def active_orders(request):#show all active orders (orders that have not been de
         for cart in user_carts:
             deliveries = Delivery.objects.filter(order_id=cart, is_delivered=False)
             delivered_list.extend(list(deliveries))
-        return render(request, 'order_history.html', {'delivered_list': delivered_list})
+        return render(request, 'active_orders.html', {'delivered_list': delivered_list})
     
 @login_required()
 def order_management(request):#allow admin user the change delivery status 

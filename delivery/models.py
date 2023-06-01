@@ -6,10 +6,17 @@ from django.contrib.auth.models import User
 class Cart(models.Model):
     user_id=models.ForeignKey(User,on_delete=models.CASCADE)
 
+    class Meta:
+        db_table = 'Cart'
+
+
 class Items(models.Model):
     dish_id=models.ForeignKey(Dish,on_delete=models.CASCADE)
     cart_id=models.ForeignKey(Cart,on_delete=models.CASCADE)
     amount=models.IntegerField(default=1)
+
+    class Meta:
+        db_table = 'Items'
 
 class Delivery(models.Model):
     order_id=models.OneToOneField(Cart,on_delete=models.CASCADE,primary_key=True)
@@ -17,3 +24,6 @@ class Delivery(models.Model):
     adress=models.CharField(max_length=200,blank=False)
     comments=models.TextField(default="")
     created=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'Delivery'

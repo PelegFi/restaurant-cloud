@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="brand-logo center">active orders</h3>
+<div>user : {{request.user}}</div>
+<a href="{% url 'user_screen' %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>back to user page</a>
+<table>
+    <thead>
+      <tr>
+          <th>order id</th>
+          <th>address</th>
+          <th>coments</th>
+          <th>created</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    {% for delivery in delivered_list %}
+      <tr>
+        <td>{{delivery.order_id.id}}</td>
+        <td>{{delivery.adress}}</td>
+        <td>{{delivery.comments}}</td>
+        <td>{{delivery.created|date:"Y-m-d"}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock content%}

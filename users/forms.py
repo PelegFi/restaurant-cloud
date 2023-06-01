@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    is_staff = forms.BooleanField(required=True)
+    is_staff = forms.BooleanField(required=False)#<----
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
 
