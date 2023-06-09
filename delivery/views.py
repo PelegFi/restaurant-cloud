@@ -4,7 +4,6 @@ from .models import Cart,Items,Delivery , User
 from Dishes.models import Category
 from django.contrib import messages
 from Dishes.models import Dish
-from django.http import HttpResponse
 # Create your views here.
 
 @login_required(login_url='user_screen')

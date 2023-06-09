@@ -50,8 +50,10 @@
         {% for error in form.is_staff.errors %}
             <div>{{error}}</div>
         {% endfor %}
-        {{form.is_staff.label}}
-        <input type="checkbox" name="is_staff" required id="id_is_staff">
+       <label>
+            <input type="checkbox" class="filled-in" checked="checked" name="is_staff" />
+            <span>Is staff </span>
+        </label>
     </div>
     <button type="submit">Sign Up</button>
 </form>

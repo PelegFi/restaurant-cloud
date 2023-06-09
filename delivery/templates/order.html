@@ -29,13 +29,13 @@
 
   <div class="row" style="display: flex; justify-content: center; flex-wrap: wrap;">
     {% for dish in dishes %}
-    <div class="col s12 m4">
+    <div class="col s12 m4 l3" style="width: 33vw; height: fit-content;">
       <form action="{% url 'order' cart_id=cart_id %}" method="post">
         {% csrf_token %}
         <div class="card meduim" style="max-height: min-content; max-width: 600px;">
-            <div class="card-image">
-                <img style="max-width:30mm;max-height:30mm;" src="{{dish.image}}">
-            </div>
+          <div class="card-image" style="display: flex; justify-content: center; align-items: center;">
+            <img style="width: 30mm; height: 30mm;" src="{{dish.image}}">
+          </div>        
             <div class="card-content">
                 <span class="card-title">{{dish.name}}</span>
                 <ul>

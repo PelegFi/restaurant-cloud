@@ -41,7 +41,10 @@
     </div>
     <div>
         <h5>{{form.is_staff.label}}</h5>
-        <input type="checkbox" name="is_staff" id="id_is_staff" checked>
+        <label>
+            <input type="checkbox" class="filled-in" name="is_staff" checked="checked" disabled/>
+            <span>Is staff </span>
+        </label>
         {% for error in form.is_staff.errors %}
         <div style="color:red">{{error}}</div>
         {% endfor %}

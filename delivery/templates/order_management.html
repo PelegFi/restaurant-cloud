@@ -20,7 +20,7 @@
         <th>
             <form action="{% url 'order_management' %}" method="post" id="deliveryForm{{ forloop.counter }}">
                 {% csrf_token %}
-                <input type="checkbox" value="{{delivery.order_id.id}}" name="is_delivered" onclick="document.getElementById('deliveryForm{{ forloop.counter }}').submit();">
+                <input type="checkbox" class="filled-in" value="{{delivery.order_id.id}}" name="is_delivered" onclick="document.getElementById('deliveryForm{{ forloop.counter }}').submit();">
               </form>         
           </th>
         <td>{{delivery.order_id.id}}</td>

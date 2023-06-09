@@ -12,23 +12,22 @@
 
   <div class="row" style="display: flex; justify-content: center; flex-wrap: wrap;">
     {% for dish in dishes %}
-    <div class="col s12 m4 l3" style="display: flex; justify-content: center;">
-        <div class="card meduim" style="max-height: min-content;">
-            <div class="card-image">
-                <img style="max-width:30mm;max-height:30mm;" src="{{dish.image}}">
-            </div>
-            <div class="card-content">
-                <span class="card-title">{{dish.name}}</span>
-                <ul>
-                    <li>PRICE : {{dish.price}}</li>
-                    <li>description : {{dish.description}}</li>
-                    <li>is gluten free : {{dish.is_gluten_free}}</li>
-                    <li>is vegeterian : {{dish.is_vegeterian}}</li>
-                    <li> dish category : {{dish.category_id.name}}</li>
-                </ul>
-            </div>
+    <div class="col s12 m4 l3" style="width: 33vw; height: auto;">
+      <div class="card">
+        <div class="card-image" style="display: flex; justify-content: center; align-items: center;">
+          <img style="width: 30mm; height: 30mm;" src="{{dish.image}}">
+        </div>        
+        <div class="card-content">
+          <span class="card-title">{{dish.name}}</span>
+          <ul style="max-height: 200px; overflow-y: auto;">
+            <li>Price: {{dish.price}}</li>
+            <li>Description: {{dish.description}}</li>
+            <li>Gluten Free: {{dish.is_gluten_free}}</li>
+            <li>Vegetarian: {{dish.is_vegeterian}}</li>
+            <li>Category: {{dish.category_id.name}}</li>
+          </ul>
         </div>
-      </form>
+      </div>
     </div>
     {% endfor %}
 
